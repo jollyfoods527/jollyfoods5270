@@ -1,45 +1,801 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="icon" type="image/png" href="logo-circulo-negro.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jolly Foods - Del Origen a tu Éxito</title>
+    <title>Jolly Foods - Premium Gourmet & Café de Especialidad</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
-        body{font-family:'Arial',sans-serif;background:#0A2E1A;color:#fff}
-        header{background:#000;padding:15px 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000;border-bottom:3px solid #D4AF37}
-        .logo{display:flex;align-items:center;gap:10px}
-        .logo span{font-weight:bold;font-size:22px;color:#D4AF37}
-        nav{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
-        nav a{color:#fff;text-decoration:none;font-weight:bold;font-size:14px;cursor:pointer;transition:0.3s}
-        nav a:hover{color:#D4AF37}
-        #cartBtn{background:#D4AF37;color:#000;border:none;padding:10px 20px;font-weight:bold;cursor:pointer;border-radius:5px}
-        #cartBtn:hover{background:#fff}
-        .hero{position:relative;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
-        .hero video{position:absolute;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(0.6) saturate(1.2)}
-        .hero-overlay{position:absolute;width:100%;height:100%;background:radial-gradient(circle,rgba(10,46,26,0.2) 0%,rgba(10,46,26,0.85) 100%);z-index:2}
-        .hero-content{position:relative;z-index:3;text-align:center;padding:0 20px;max-width:1000px}
-        .hero h1{font-size:5rem;margin-bottom:25px;color:#D4AF37;text-shadow:4px 4px 20px #000;line-height:1.1;letter-spacing:2px}
-        .hero .subtitle{font-size:2.2rem;margin-bottom:20px;color:#fff;text-shadow:3px 3px 10px #000;font-weight:300}
-        .hero .tagline{font-size:1.4rem;margin-bottom:50px;color:#D4AF37;text-shadow:2px 2px 8px #000}
-        .btn{background:#D4AF37;color:#000;padding:20px 50px;border:none;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;font-size:17px;transition:0.3s;border-radius:5px;box-shadow:0 4px 20px rgba(212,175,55,0.5);text-transform:uppercase}
-        .btn:hover{background:#fff;transform:translateY(-3px);box-shadow:0 8px 30px rgba(212,175,55,0.7)}
-        .btn-small{padding:12px 25px;font-size:14px;margin-top:15px}
-        section{padding:100px 5%;max-width:1400px;margin:auto;background:#0A2E1A}
-        h2{font-size:3.2rem;margin-bottom:50px;color:#D4AF37;text-align:center;text-shadow:2px 2px 10px #000}
-        h3{color:#D4AF37;font-size:2rem;margin-bottom:20px}
-        h4{color:#D4AF37;font-size:1.4rem;margin:20px 0 10px}
-        .gold-text{color:#D4AF37}
-        .nosotros-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
-        .nosotros-grid img{width:100%;border:4px solid #D4AF37;box-shadow:0 10px 40px rgba(0,0,0,0.5)}
-        .catalogo-item{background:linear-gradient(135deg,#000 0%,#1a1a1a 100%);margin:30px 0;padding:35px;cursor:pointer;border:3px solid #D4AF37;transition:0.3s;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.4)}
-        .catalogo-item:hover{background:#1a1a1a;border-color:#fff;transform:translateX(10px)}
-        .catalogo-content{display:none;padding:35px 0}
-        .catalogo-content.active{display:block}
-        .catalogo-content img{width:100%;max-width:650px;margin:25px 0;border:4px solid #D4AF37;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,0.6)}
-        .variedades{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:30px;margin-top:50px}
-        .variedad{background:linear-gradient(135deg,#000 0%,#0d0d0d 100%);padding:30px;border:2px solid #D4AF37;cursor:pointer;transition:0.4s;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.5)}
-        .variedad:hover{border-color:#fff;transform:translateY(-8px);box-shadow:0 15px 50px rgba(212,175,55,0.4)}
-        .variedad h4{font-size:1.5rem;margin-bottom:12px}
-        .variedad .origen{font-size:14px;color:#aaa;margin-bottom:15px;font-style:italic}
-        .variedad .badge{display:inline-block;background:#D4AF37;color:#000;padding:6px 14px
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+        .font-serif-jolly { font-family: 'Playfair Display', serif; }
+        
+        /* Clases de apoyo para los menús desplegables puros de CSS/JS con puente de seguridad */
+        .dropdown-menu { display: none; }
+        .dropdown-container:hover .dropdown-menu { display: block; }
+        
+        .sub-dropdown-menu { display: none; }
+        .sub-dropdown-container:hover .sub-dropdown-menu { display: block; }
+
+        .active-coffee-btn {
+            background-color: #fbbf24 !important; /* amber-400 */
+            color: #112f1a !important;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-[#f4f7f4] text-gray-800 antialiased">
+
+    
+
+    <header class="sticky top-0 z-40 bg-black text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-5 py-3 flex justify-between items-center">
+            
+            <div class="flex items-center gap-2">
+                <div class="text-[#2b643b] text-3xl"><i class="fa-solid fa-leaf"></i></div>
+                <div>
+                    <span class="block font-serif-jolly text-2xl font-black text-white tracking-tight leading-none">Jolly foods</span>
+                    <span class="block text-[9px] tracking-[0.25em] text-[#2b643b] font-bold uppercase mt-0.5">Natural Preserves</span>
+                </div>
+            </div>
+
+            <nav class="hidden lg:flex items-center gap-8 text-xs font-semibold tracking-wider text-white">
+                <a href="#" class="border-b-2 border-[#2b643b] pb-1 text-[#2b643b]">INICIO</a>
+                <a href="#nosotros" class="hover:text-[#2b643b] transition pb-1">NOSOTROS</a>
+                
+                <div class="relative dropdown-container pb-[20px] -mb-[20px]">
+                    <button class="hover:text-[#2b643b] transition flex items-center gap-1 uppercase cursor-pointer py-1">
+                        CATÁLOGO DE PRODUCTOS <i class="fa-solid fa-chevron-down text-[9px]"></i>
+                    </button>
+                    <div class="absolute left-0 top-full w-56 bg-white border border-gray-100 rounded-lg shadow-xl dropdown-menu py-1 text-gray-700 z-50">
+                        
+                        <div class="relative sub-dropdown-container pr-[10px] -mr-[10px]">
+                            <a href="#linea-palmito" class="flex justify-between items-center px-4 py-2.5 hover:bg-emerald-50 hover:text-[#2b643b] transition">
+                                <span>Palmito</span>
+                                <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                            </a>
+                            <div class="absolute left-full top-0 w-64 bg-white border border-gray-100 rounded-lg shadow-xl sub-dropdown-menu py-1 text-gray-600 ml-1">
+                                <a href="#linea-palmito" class="block px-4 py-2 hover:bg-emerald-50 hover:text-[#2b643b]">Palmito en Conserva</a>
+                                <a href="#linea-palmito" class="block px-4 py-2 hover:bg-emerald-50 hover:text-[#2b643b]">Palmito en Conserva Troceado</a>
+                                <a href="#linea-palmito" class="block px-4 py-2 bg-amber-50 text-amber-900 font-medium hover:bg-amber-100 flex items-center gap-1">
+                                    <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> Crema de Palmito Untable
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="relative sub-dropdown-container pr-[10px] -mr-[10px]">
+                            <a href="#linea-pina" class="flex justify-between items-center px-4 py-2.5 hover:bg-emerald-50 hover:text-[#2b643b] transition">
+                                <span>Piña</span>
+                                <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                            </a>
+                            <div class="absolute left-full top-0 w-56 bg-white border border-gray-100 rounded-lg shadow-xl sub-dropdown-menu py-1 text-gray-600 ml-1">
+                                <a href="#linea-pina" class="block px-4 py-2 hover:bg-emerald-50 hover:text-[#2b643b]">Zumo de Piña</a>
+                                <a href="#linea-pina" class="block px-4 py-2 hover:bg-emerald-50 hover:text-[#2b643b]">Piña en Conserva</a>
+                            </div>
+                        </div>
+
+                        <div class="relative sub-dropdown-container pr-[10px] -mr-[10px]">
+                            <a href="#cafe-gourmet" class="flex justify-between items-center px-4 py-2.5 hover:bg-emerald-50 hover:text-[#2b643b] transition">
+                                <span>Café Gourmet</span>
+                                <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                            </a>
+                            <div class="absolute left-full top-0 w-56 bg-white border border-gray-100 rounded-lg shadow-xl sub-dropdown-menu py-1 text-[11px] text-gray-600 ml-1">
+                                <div class="px-3 py-1 font-bold text-white bg-gray-50 border-b border-gray-100">Variedades:</div>
+                                <a href="#cafe-gourmet" onclick="mostrarVariedad('geisha')" class="block px-4 py-1.5 hover:bg-emerald-50 hover:text-[#2b643b]">Geisha</a>
+                                <a href="#cafe-gourmet" onclick="mostrarVariedad('sarchi')" class="block px-4 py-1.5 hover:bg-emerald-50 hover:text-[#2b643b]">Villa Sarchí</a>
+                                <a href="#cafe-gourmet" onclick="mostrarVariedad('kenya')" class="block px-4 py-1.5 hover:bg-emerald-50 hover:text-[#2b643b]">Kenia</a>
+                                <a href="#cafe-gourmet" onclick="mostrarVariedad('centroamericano')" class="block px-4 py-1.5 hover:bg-emerald-50 hover:text-[#2b643b]">Centroamericano</a>
+                                <a href="#cafe-gourmet" onclick="mostrarVariedad('typica-lima')" class="block px-4 py-1.5 hover:bg-emerald-50 hover:text-[#2b643b]">Typica Lima</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <a href="#cafe-gourmet" class="hover:text-[#2b643b] transition pb-1">CAFÉ GOURMET</a>
+                <a href="#calidad" class="hover:text-[#2b643b] transition pb-1">CALIDAD</a>
+                <a href="#pedidos" class="hover:text-[#2b643b] transition pb-1">PEDIDOS</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <!-- Contactanos Dropdown -->
+                <div class="relative dropdown-container">
+                    <button class="bg-[#1e4629] hover:bg-[#285e37] text-white text-xs font-semibold px-4 py-2 rounded flex items-center gap-2 transition cursor-pointer">
+                        <i class="fa-solid fa-address-book text-sm"></i> Contactanos <i class="fa-solid fa-chevron-down text-[9px]"></i>
+                    </button>
+                    <div class="absolute right-0 top-full w-56 bg-white border border-gray-100 rounded-lg shadow-xl dropdown-menu py-2 text-gray-700 z-50 mt-2">
+                        <a href="tel:+50689435264" class="flex items-center gap-3 px-4 py-2.5 hover:bg-emerald-50 hover:text-[#2b643b] transition text-xs">
+                            <i class="fa-solid fa-phone text-[#2b643b] w-4"></i> <span>+506 8943 5264</span>
+                        </a>
+                        <a href="https://wa.me/50689435264" target="_blank" class="flex items-center gap-3 px-4 py-2.5 hover:bg-emerald-50 hover:text-[#2b643b] transition text-xs">
+                            <i class="fa-brands fa-whatsapp text-[#2b643b] w-4"></i> <span>WhatsApp Directo</span>
+                        </a>
+                        <a href="mailto:Guillermopuchol@gmail.com" class="flex items-center gap-3 px-4 py-2.5 hover:bg-emerald-50 hover:text-[#2b643b] transition text-xs">
+                            <i class="fa-solid fa-envelope text-[#2b643b] w-4"></i> <span>Guillermopuchol@gmail.com</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mi Carrito -->
+                <button id="cart-btn" onclick="toggleCart()" class="relative bg-amber-400 hover:bg-amber-500 text-white text-xs font-bold px-4 py-2 rounded flex items-center gap-2 transition cursor-pointer">
+                    <i class="fa-solid fa-cart-shopping text-sm"></i> Mi Carrito
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-[#112f1a] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative bg-cover bg-center py-16 text-white" style="background-image: linear-gradient(to right, rgba(17, 47, 26, 0.9) 50%, rgba(17, 47, 26, 0.5)), url('https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?q=80&w=1200&auto=format&fit=crop');">
+        <div class="max-w-7xl mx-auto px-4">
+            <span class="text-amber-400 font-serif-jolly text-lg italic block mb-1">Tradición de Excelencia</span>
+            <h1 class="font-serif-jolly text-4xl lg:text-5xl font-black max-w-xl leading-none">Productos Exclusivos del Valle Occidental</h1>
+            <p class="text-gray-300 text-xs max-w-md font-light mt-3  leading-relaxed">Cultivados en condiciones climáticas perfectas, con procesos artesanales rigurosos diseñados para satisfacer las demandas gourmet globales.</p>
+        </div>
+    </section>
+
+    
+    <!-- ELEMENTO LLAMATIVO -->
+    <section class="bg-gradient-to-r from-[#112f1a] to-[#00a896] text-white py-6 -mt-12 mb-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-around items-center gap-4 text-center">
+            <div>
+                <div class="text-3xl font-bold">15+</div>
+                <div class="text-xs uppercase tracking-wider opacity-90">Años Exportando</div>
+            </div>
+            <div class="hidden md:block w-px h-10 bg-white/30"></div>
+            <div>
+                <div class="text-3xl font-bold">3</div>
+                <div class="text-xs uppercase tracking-wider opacity-90">Continentes</div>
+            </div>
+            <div class="hidden md:block w-px h-10 bg-white/30"></div>
+            <div>
+                <div class="text-3xl font-bold">100%</div>
+                <div class="text-xs uppercase tracking-wider opacity-90">Natural Costa Rica</div>
+            </div>
+            <div class="hidden md:block w-px h-10 bg-white/30"></div>
+            <div>
+                <div class="text-3xl font-bold">FDA</div>
+                <div class="text-xs uppercase tracking-wider opacity-90">Certificado</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="nosotros" class="py-16  bg-[#112f1a] text-white relative scroll-mt-20">
+        <div class="max-w-5xl mx-auto px-4 md:px-6">
+            <div class="text-center mb-12">
+                <span class="text-amber-400 font-serif-jolly text-xl italic block">Origen Familiar</span>
+                <h2 class="font-serif-jolly text-3xl md:text-4xl font-extrabold tracking-wide text-amber-400 uppercase mt-1">
+                    FINCA EL PUCHOL: CAFÉ DE ESPECIALIDAD
+                </h2>
+                <div class="w-20 h-0.5 bg-amber-400 mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm leading-relaxed text-gray-200 mb-10">
+                <div class="bg-white/5 p-6 rounded-xl border border-white/10 space-y-3">
+                    <h3 class="font-serif-jolly text-lg font-bold text-amber-300 tracking-wide uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-circle-info text-amber-400 text-xs"></i> INFORMACIÓN DE LA FINCA
+                    </h3>
+                    <p class="font-light">
+                        La finca familiar <strong>El Puchol</strong>, dirigida por <strong>Guillermo Puchol</strong> y ubicada en la zona de Bajo Zapote (Naranjo, Valle Occidental de Costa Rica), cultiva café de especialidad a 1.500 msnm. Su terroir combina suelos volcánicos, orientación sur y microclimas ideales que permiten producir algunos de los granos más exclusivos del país.
+                    </p>
+                </div>
+
+                <div class="bg-white/5 p-6 rounded-xl border border-white/10 space-y-3">
+                    <h3 class="font-serif-jolly text-lg font-bold text-amber-300 tracking-wide uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-compass text-amber-400 text-xs"></i> UBICACION Y TERRENO UNICO
+                    </h3>
+                    <p class="font-light mb-2">
+                        <strong>Características del terreno:</strong> Suelos volcánicos en suave pendiente orientados al sur, acompañados por una corriente de agua natural de alta pureza que alimenta orgánicamente nuestras plantaciones todo el año.
+                    </p>
+                    <p class="font-light text-amber-100/90 border-t border-white/10 pt-2 text-xs italic">
+                        <i class="fa-solid fa-quote-left text-amber-400/40 mr-1"></i> Tenemos el orgullo de contar con un gran profesional llamado <strong>Antonio Barrantes</strong>, quien se encarga con absoluta maestría del cultivo, la producción y la selección meticulosa de nuestros mejores granos de café.
+                    </p>
+                </div>
+
+                <div class="bg-white/5 p-6 rounded-xl border border-white/10 space-y-3 md:col-span-2">
+                    <h3 class="font-serif-jolly text-lg font-bold text-amber-300 tracking-wide uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-certificate text-amber-400 text-xs"></i> NUESTRO VALOR DIFERENCIAL Y METAS
+                    </h3>
+                    <p class="font-light">
+                        Lo que nos diferencia es la <strong>trazabilidad absoluta</strong> y la <strong>ausencia total de defectos</strong>. Al cultivarse en condiciones ideales y procesarse artesanalmente (eliminando la 'miel', remojo de 24h, secado al sol totalmente artesanal), el café conserva un aroma y sabor exclusivos, y una alta concentración de antioxidantes. Ofrece una estimulación noble que mejora la concentración y energía, protegiendo el sistema cardiovascular sin causar acidez ni ansiedad.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="https://www.instagram.com/p/DWlW_eXishd/" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-white font-bold text-xs uppercase px-6 py-3.5 rounded-lg shadow-lg transition tracking-wider transform hover:scale-[1.02]">
+                    <i class="fa-brands fa-instagram text-base"></i> Conece más sobre nosotros
+                </a>
+                <a href="https://www.instagram.com/reels/DFCmrJEq8Na/" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/10 text-amber-400 border border-amber-400/40 hover:border-amber-400 font-bold text-xs uppercase px-6 py-3.5 rounded-lg shadow-lg transition tracking-wider transform hover:scale-[1.02]">
+                    <i class="fa-solid fa-video text-base"></i> Conoce a Antonio Barrantes
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="seccion-productos" class="max-w-7xl mx-auto px-4 py-16">
+        <div class="text-center mb-10">
+            <h2 class="font-serif-jolly text-3xl font-bold text-white uppercase tracking-wider">Catálogo de Productos</h2>
+            <p class="text-xs text-gray-500 font-light mt-1">Conoce nuestra selección meticulosa de conservas de alta gama y cosechas exclusivas</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            
+            <div id="linea-palmito" class="bg-white rounded-2xl border border-gray-200/80 shadow-xs overflow-hidden flex flex-col justify-between scroll-mt-24 p-4 space-y-4">
+                <div>
+                    <div class="text-[#2b643b] font-serif-jolly text-lg font-bold flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-seedling"></i> Línea de Palmito
+                    </div>
+                    <div class="space-y-2">
+                        <div class="bg-[#f8faf8] p-2.5 rounded border-l-4 border-emerald-600 font-medium text-xs text-gray-700 flex justify-between items-center cursor-pointer hover:bg-emerald-50" onclick="showProduct('Palmito Clásico', 'Conserva premium 400g. Corazón tierno entero, textura firme y sabor suave. Ideal para ensaladas César y ceviches.', 'palmito_con_logo_a6b439b0.jpg')"><span>Palmito en Conserva Clásico</span><button onclick="event.stopPropagation(); addToCart('Palmito Clásico', 'Conserva premium 400g')" class="text-[10px] bg-emerald-600 hover:bg-emerald-700 text-white px-2 py-1 rounded transition"><i class="fa-solid fa-plus"></i></button></div>
+                        <div class="bg-[#f8faf8] p-2.5 rounded border-l-4 border-emerald-600 font-medium text-xs text-gray-700 flex justify-between items-center cursor-pointer hover:bg-emerald-50" onclick="showProduct('Palmito Troceado', 'Listo para usar en ensaladas, pastas y pizzas. Corte uniforme, mantiene crujiente.', 'palmito_con_logo_a6b439b0.jpg')"><span>Palmito Troceado</span><button onclick="addToCart('Palmito Troceado', 'Ideal para ensaladas')" class="text-[10px] bg-emerald-600 hover:bg-emerald-700 text-white px-2 py-1 rounded transition"><i class="fa-solid fa-plus"></i></button></div>
+                        <div class="bg-amber-50/60 p-2.5 rounded border-l-4 border-amber-500 font-semibold text-xs text-amber-900 flex justify-between items-center cursor-pointer hover:bg-amber-100" onclick="showProduct('Crema de Palmito', 'Untable gourmet estrella. Cremosa, con toque de limón y especias. Perfecta para tostadas y dips.', 'palmito_con_logo_a6b439b0.jpg')"><span>Crema de Palmito Untable</span><button onclick="addToCart('Crema Palmito', 'Untable gourmet estrella')" class="text-[10px] bg-amber-500 hover:bg-amber-600 text-white px-2 py-1 rounded transition"><i class="fa-solid fa-plus"></i></button></div>
+                    </div>
+                </div>
+                <div class="bg-[#112f1a] text-white p-4 rounded-xl space-y-2.5">
+                    <div class="w-full h-40 rounded-lg bg-white/10 overflow-hidden">
+                        <img src="image_d20146.png" alt="Palmito Gourmet" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <h4 class="text-amber-400 font-bold text-xs tracking-wide flex items-center gap-1"><i class="fa-solid fa-crown"></i> Calidad Exportación Premium</h4>
+                        <p class="text-[10px] text-gray-300 font-light mt-1 leading-relaxed">Corazones tiernos cultivados en suelos volcánicos, procesados en menos de 4 horas tras cosecha para preservar textura crujiente y sabor delicado a nuez fresca.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="linea-pina" class="bg-white rounded-2xl border border-gray-200/80 shadow-xs overflow-hidden flex flex-col justify-between scroll-mt-24 p-4 space-y-4">
+                <div>
+                    <div class="text-[#2b643b] font-serif-jolly text-lg font-bold flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-apple-whole"></i> Línea de Piña Dorada
+                    </div>
+                    <div class="space-y-2">
+                        <div class="bg-[#f8faf8] p-2.5 rounded border-l-4 border-yellow-500 font-medium text-xs text-gray-700 flex justify-between items-center cursor-pointer hover:bg-yellow-50" onclick="showProduct('Zumo Piña', '100% natural, sin azúcar añadida. Exprimido en frío, vitamina C pura.', 'pina_con_logo_bd50517e.jpg')"><span>Zumo de Piña 100% Puro</span><button onclick="addToCart('Zumo Piña', 'Natural sin azúcar')" class="text-[10px] bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded transition"><i class="fa-solid fa-plus"></i></button></div>
+                        <div class="bg-[#f8faf8] p-2.5 rounded border-l-4 border-yellow-500 font-medium text-xs text-gray-700 flex justify-between items-center cursor-pointer hover:bg-yellow-50" onclick="showProduct('Piña en Conserva', 'Rodajas selectas en su jugo natural, sin almíbar. 565g. Dulzura equilibrada.', 'pina_con_logo_bd50517e.jpg')"><span>Piña en Conserva</span><button onclick="addToCart('Piña Conserva', 'Rodajas selectas')" class="text-[10px] bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded transition"><i class="fa-solid fa-plus"></i></button></div>
+                    </div>
+                </div>
+                <div class="bg-[#112f1a] text-white p-4 rounded-xl space-y-2.5">
+                    <div class="w-full h-40 rounded-lg bg-white/10 overflow-hidden">
+                        <img src="image_d20146.png" alt="Piña Premium" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <h4 class="text-amber-400 font-bold text-xs tracking-wide flex items-center gap-1"><i class="fa-solid fa-sun"></i> Dulzura Natural</h4>
+                        <p class="text-[10px] text-gray-300 font-light mt-1 leading-relaxed">Piña Golden MD2 cosechada en punto óptimo de maduración. Sin azúcares añadidos, solo el dulzor tropical concentrado del Valle Occidental.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="linea-cafes-catalogo" class="bg-white rounded-2xl border border-gray-200/80 shadow-xs overflow-hidden flex flex-col justify-between scroll-mt-24 p-4 space-y-4">
+                <div>
+                    <div class="text-[#2b643b] font-serif-jolly text-lg font-bold flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-mug-hot"></i> Nuestro Café
+                    </div>
+                    <div class="space-y-2">
+                        <a href="#cafe-gourmet" onclick="mostrarVariedad('geisha')" class="bg-[#f8faf8] p-2.5 rounded border-l-4 border-amber-600 font-bold text-xs text-gray-800 hover:bg-amber-50/40 transition block">Geisha</a>
+                        <a href="#cafe-gourmet" onclick="mostrarVariedad('sarchi')" class="bg-[#f8faf8] p-2.5 rounded border-l-4 border-amber-600 font-bold text-xs text-gray-800 hover:bg-amber-50/40 transition block">Villa Sarchí</a>
+                        <a href="#cafe-gourmet" onclick="mostrarVariedad('kenya')" class="bg-[#f8faf8] p-2.5 rounded border-l-4 border-amber-600 font-bold text-xs text-gray-800 hover:bg-amber-50/40 transition block">Kenia</a>
+                        <a href="#cafe-gourmet" onclick="mostrarVariedad('centroamericano')" class="bg-[#f8faf8] p-2.5 rounded border-l-4 border-amber-600 font-bold text-xs text-gray-800 hover:bg-amber-50/40 transition block">Centroamericano</a>
+                        <a href="#cafe-gourmet" onclick="mostrarVariedad('typica-lima')" class="bg-[#f8faf8] p-2.5 rounded border-l-4 border-amber-600 font-bold text-xs text-gray-800 hover:bg-amber-50/40 transition block">Typica Lima</a>
+                        <a href="#cafe-gourmet" onclick="mostrarVariedad('typica-lourdes')" class="bg-[#f8faf8] p-2.5 rounded border-l-4 border-amber-600 font-bold text-xs text-gray-800 hover:bg-amber-50/40 transition block">Typica Lourdes</a>
+                        <a href="#cafe-gourmet" onclick="mostrarVariedad('typica-sanroque')" class="bg-[#f8faf8] p-2.5 rounded border-l-4 border-amber-600 font-bold text-xs text-gray-800 hover:bg-amber-50/40 transition block">Typica San Roque</a>
+                        <a href="#cafe-gourmet" onclick="mostrarVariedad('typica-mejorado')" class="bg-[#f8faf8] p-2.5 rounded border-l-4 border-amber-600 font-bold text-xs text-gray-800 hover:bg-amber-50/40 transition block">Typica Mejorado</a>
+                    </div>
+                </div>
+                <div class="bg-[#112f1a] text-white p-4 rounded-xl space-y-2.5">
+                    <div class="w-full h-40 rounded-lg bg-white/10 overflow-hidden">
+                        <img src="image_d20106.png" alt="Café de Especialidad" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <h4 class="text-amber-400 font-bold text-xs tracking-wide flex items-center gap-1"><i class="fa-solid fa-mountain"></i> 1.500 msnm - Micro-lotes</h4>
+                        <p class="text-[10px] text-gray-300 font-light mt-1 leading-relaxed">8 variedades únicas cultivadas por Antonio Barrantes. Cada lote con perfil sensorial distinto, trazabilidad total y proceso artesanal.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="cafe-gourmet" class="py-16 bg-[#0f2e1b] text-white border-t border-white/10 scroll-mt-24">
+        <div class="max-w-5xl mx-auto px-4 md:px-6">
+            
+            <div class="text-center mb-8">
+                <span class="text-xs uppercase tracking-widerst font-semibold text-amber-400 bg-amber-950/50 px-3 py-1 rounded-full border border-amber-900/40">
+                    Cosechas Finca El Puchol - 1.500 msnm
+                </span>
+                <h2 class="font-serif-jolly text-3xl md:text-4xl mt-3 font-bold text-white">
+                    Nuestras Variedades Exclusivas
+                </h2>
+                <p class="text-xs text-gray-300 font-light mt-2 max-w-lg mx-auto">Cada variedad cultivada artesanalmente por Antonio Barrantes. Selecciona para descubrir su historia, perfil sensorial completo y proceso único.</p>
+                <div class="w-12 h-0.5 bg-amber-400 mx-auto mt-4"></div>
+            </div>
+            
+            <!-- ¿QUÉ ES CAFÉ GOURMET? -->
+            <div class="bg-white/5 border border-amber-400/20 rounded-2xl p-6 md:p-8 mb-10 backdrop-blur-sm">
+                <div class="grid md:grid-cols-3 gap-6 items-start">
+                    <div class="md:col-span-1">
+                        <h3 class="font-serif-jolly text-xl text-amber-400 font-bold mb-2">¿Qué es Café Gourmet?</h3>
+                        <p class="text-[11px] text-amber-200/80 uppercase tracking-widerst">No es marketing. Es estándar SCA 80+</p>
+                    </div>
+                    <div class="md:col-span-2 space-y-3 text-[13px] text-gray-200 leading-relaxed font-light">
+                        <p><strong class="text-white">El café gourmet</strong> es café de especialidad cultivado por encima de 1.200 msnm, cosechado a mano grano por grano maduro, y procesado sin defectos. En Finca El Puchol lo llevamos a 1.500 msnm con agua de manantial pura.</p>
+                        <div class="grid sm:grid-cols-2 gap-3 pt-2">
+                            <div class="bg-black/20 p-3 rounded-lg border border-white/10">
+                                <p class="text-[11px] text-amber-300 font-semibold mb-1">CARACTERÍSTICAS</p>
+                                <ul class="text-[12px] space-y-1 text-gray-300">
+                                    <li>• Trazabilidad total (sabes la parcela)</li>
+                                    <li>• 0 defectos, selección triple manual</li>
+                                    <li>• Secado solar lento 15 días</li>
+                                    <li>• Notas reales: jazmín, cacao, frutos rojos</li>
+                                </ul>
+                            </div>
+                            <div class="bg-black/20 p-3 rounded-lg border border-white/10">
+                                <p class="text-[11px] text-amber-300 font-semibold mb-1">VS CAFÉ NORMAL</p>
+                                <ul class="text-[12px] space-y-1 text-gray-300">
+                                    <li>• Comercial: mezcla, torrefacto, amargo</li>
+                                    <li>• Acidez que daña estómago</li>
+                                    <li>• Gourmet: limpio, sin ansiedad</li>
+                                    <li>• Alto en antioxidantes naturales</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-8">
+                <button onclick="mostrarVariedad('geisha')" id="btn-geisha" class="coffee-tab-btn px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition cursor-pointer active-coffee-btn">
+                    Geisha
+                </button>
+                <button onclick="mostrarVariedad('sarchi')" id="btn-sarchi" class="coffee-tab-btn px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition cursor-pointer">
+                    Villa Sarchí
+                </button>
+                <button onclick="mostrarVariedad('kenya')" id="btn-kenya" class="coffee-tab-btn px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition cursor-pointer">
+                    Kenia
+                </button>
+                <button onclick="mostrarVariedad('centroamericano')" id="btn-centroamericano" class="coffee-tab-btn px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition cursor-pointer">
+                    Centroamericano
+                </button>
+                <button onclick="mostrarVariedad('typica-lima')" id="btn-typica-lima" class="coffee-tab-btn px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition cursor-pointer">
+                    Typica Lima
+                </button>
+                <button onclick="mostrarVariedad('typica-lourdes')" id="btn-typica-lourdes" class="coffee-tab-btn px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition cursor-pointer">
+                    Typica Lourdes
+                </button>
+                <button onclick="mostrarVariedad('typica-sanroque')" id="btn-typica-sanroque" class="coffee-tab-btn px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition cursor-pointer">
+                    Typica San Roque
+                </button>
+                <button onclick="mostrarVariedad('typica-mejorado')" id="btn-typica-mejorado" class="coffee-tab-btn px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition cursor-pointer">
+                    Typica Mejorado
+                </button>
+            </div>
+
+            <div class="max-w-2xl mx-auto">
+                
+                <div id="desc-geisha" class="coffee-panel block bg-white/5 border border-amber-400/20 rounded-xl p-6 space-y-4">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-serif-jolly text-amber-400 font-bold">Variedad Geisha</h4>
+                        <button onclick="addToCart('Café Geisha', '250g - Edición limitada')" class="bg-amber-400 hover:bg-amber-500 text-white text-[11px] font-bold px-3 py-1.5 rounded transition"><i class="fa-solid fa-cart-plus mr-1"></i> Añadir</button>
+                    </div>
+                    <p class="text-sm text-gray-200 font-light leading-relaxed">Considerada la joya de la corona del café de especialidad mundial, nuestra Geisha crece en la ladera sur de Bajo Zapote donde el microclima fresco potencia su complejidad aromática. Es el varietal más cotizado por su perfil floral extraordinario, con notas intensas a jazmín, bergamota y toques frutales cítricos de mandarina. Su taza es increíblemente limpia, sedosa y con una acidez brillante tipo champaña que evoluciona en boca. Cultivada a 1.500 msnm en suelos volcánicos, cada grano es seleccionado manualmente por Antonio Barrantes.</p>
+                    <div class="grid grid-cols-2 gap-3 text-[11px] text-amber-100/90 pt-3 border-t border-white/10">
+                        <div><strong class="text-amber-300">Proceso:</strong> Lavado artesanal 24h + secado solar lento</div>
+                        <div><strong class="text-amber-300">Altitud:</strong> 1.500 msnm, Valle Occidental</div>
+                        <div><strong class="text-amber-300">Notas:</strong> Jazmín, bergamota, miel, cítricos</div>
+                        <div><strong class="text-amber-300">Cuerpo:</strong> Té-like, elegante, final prolongado</div>
+                    </div>
+                </div>
+
+                <div id="desc-sarchi" class="coffee-panel hidden bg-white/5 border border-amber-400/20 rounded-xl p-6 space-y-4">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-serif-jolly text-amber-400 font-bold">Variedad Villa Sarchí</h4>
+                        <button onclick="addToCart('Café Villa Sarchí', '250g - Mutación costarricense')" class="bg-amber-400 hover:bg-amber-500 text-white text-[11px] font-bold px-3 py-1.5 rounded transition"><i class="fa-solid fa-cart-plus mr-1"></i> Añadir</button>
+                    </div>
+                    <p class="text-sm text-gray-200 font-light leading-relaxed">Mutación natural nacida en Costa Rica, la Villa Sarchí es orgullo nacional. En nuestra finca desarrolla una dulzura extraordinaria gracias al agua pura de manantial que la riega. Ofrece una taza increíblemente equilibrada con acidez málica brillante (manzana verde), cuerpo redondo y cremoso, y notas a caramelo, chocolate con leche y frutos secos tostados. Es consistente, noble y perfecta para espresso o filtrados. Su porte bajo permite una maduración lenta que concentra azúcares.</p>
+                    <div class="grid grid-cols-2 gap-3 text-[11px] text-amber-100/90 pt-3 border-t border-white/10">
+                        <div><strong class="text-amber-300">Proceso:</strong> Honey rojo y Natural</div>
+                        <div><strong class="text-amber-300">Perfil:</strong> Dulce, balanceado, muy versátil</div>
+                        <div><strong class="text-amber-300">Notas:</strong> Caramelo, almendra, manzana, cacao</div>
+                        <div><strong class="text-amber-300">Cuerpo:</strong> Medio, sedoso, aterciopelado</div>
+                    </div>
+                </div>
+
+                <div id="desc-kenya" class="coffee-panel hidden bg-white/5 border border-amber-400/20 rounded-xl p-6 space-y-4">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-serif-jolly text-amber-400 font-bold">Variedad Kenia SL28</h4>
+                        <button onclick="addToCart('Café Kenia SL28', '250g - Exótico')" class="bg-amber-400 hover:bg-amber-500 text-white text-[11px] font-bold px-3 py-1.5 rounded transition"><i class="fa-solid fa-cart-plus mr-1"></i> Añadir</button>
+                    </div>
+                    <p class="text-sm text-gray-200 font-light leading-relaxed">Adaptamos la legendaria SL28 de Kenia a nuestro terroir volcánico, logrando una explosión frutal única. Es un café vibrante, jugoso y complejo que recuerda a un vino tinto afrutado. Presenta acidez alta pero dulce, con notas intensas a grosella negra, arándano, tomate cherry y un toque especiado. Su postgusto es limpio, prolongado y ligeramente vinico. Ideal para quienes buscan experiencias sensoriales atrevidas. Requiere tueste medio para preservar su carácter.</p>
+                    <div class="grid grid-cols-2 gap-3 text-[11px] text-amber-100/90 pt-3 border-t border-white/10">
+                        <div><strong class="text-amber-300">Proceso:</strong> Lavado doble fermentación</div>
+                        <div><strong class="text-amber-300">Origen genético:</strong> Scott Laboratories</div>
+                        <div><strong class="text-amber-300">Notas:</strong> Frutos rojos, grosella, especias</div>
+                        <div><strong class="text-amber-300">Acidez:</strong> Alta, jugosa, compleja</div>
+                    </div>
+                </div>
+
+                <div id="desc-centroamericano" class="coffee-panel hidden bg-white/5 border border-amber-400/20 rounded-xl p-6 space-y-4">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-serif-jolly text-amber-400 font-bold">Variedad Centroamericano</h4>
+                        <button onclick="addToCart('Café Centroamericano', '250g - Híbrido')" class="bg-amber-400 hover:bg-amber-500 text-white text-[11px] font-bold px-3 py-1.5 rounded transition"><i class="fa-solid fa-cart-plus mr-1"></i> Añadir</button>
+                    </div>
+                    <p class="text-sm text-gray-200 font-light leading-relaxed">Híbrido moderno de alto rendimiento desarrollado para resistencia sin sacrificar calidad. En El Puchol brilla por su consistencia excepcional taza tras taza. Ofrece el perfil clásico costarricense que todos aman: balance perfecto entre dulzura, acidez cítrica suave y cuerpo medio. Notas a panela, chocolate oscuro, naranja confitada y un toque de nuez moscada. Es nuestro café más versátil, perfecto para el día a día y para clientes que buscan trazabilidad 100% garantizada.</p>
+                    <div class="grid grid-cols-2 gap-3 text-[11px] text-amber-100/90 pt-3 border-t border-white/10">
+                        <div><strong class="text-amber-300">Proceso:</strong> Lavado tradicional</div>
+                        <div><strong class="text-amber-300">Ventaja:</strong> Consistencia y trazabilidad total</div>
+                        <div><strong class="text-amber-300">Notas:</strong> Panela, cacao, cítricos dulces</div>
+                        <div><strong class="text-amber-300">Tueste recomendado:</strong> Medio</div>
+                    </div>
+                </div>
+
+                <div id="desc-typica-lima" class="coffee-panel hidden bg-white/5 border border-amber-400/20 rounded-xl p-6 space-y-4">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-serif-jolly text-amber-400 font-bold">Variedad Typica Lima</h4>
+                        <button onclick="addToCart('Café Typica Lima', '250g - Ancestral')" class="bg-amber-400 hover:bg-amber-500 text-white text-[11px] font-bold px-3 py-1.5 rounded transition"><i class="fa-solid fa-cart-plus mr-1"></i> Añadir</button>
+                    </div>
+                    <p class="text-sm text-gray-200 font-light leading-relaxed">Línea ancestral de Typica de pureza genética sobresaliente, preservada por generaciones. Es la elegancia clásica del café: taza limpia, libre de defectos, con una sutileza que enamora. Presenta matices achocolatados finos, caramelo suave, almendra tostada y una acidez cítrica sumamente balanceada que recuerda a lima dulce. Su cuerpo es sedoso como la seda. Secado al sol totalmente artesanal durante 15 días para desarrollar su dulzura natural.</p>
+                    <div class="grid grid-cols-2 gap-3 text-[11px] text-amber-100/90 pt-3 border-t border-white/10">
+                        <div><strong class="text-amber-300">Proceso:</strong> Lavado + secado solar 15 días</div>
+                        <div><strong class="text-amber-300">Herencia:</strong> Typica puro de altura</div>
+                        <div><strong class="text-amber-300">Notas:</strong> Chocolate, caramelo, lima, almendra</div>
+                        <div><strong class="text-amber-300">Cuerpo:</strong> Sedoso, limpio, elegante</div>
+                    </div>
+                </div>
+
+                <div id="desc-typica-lourdes" class="coffee-panel hidden bg-white/5 border border-amber-400/20 rounded-xl p-6 space-y-4">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-serif-jolly text-amber-400 font-bold">Variedad Typica Lourdes</h4>
+                        <button onclick="addToCart('Café Typica Lourdes', '250g - Micro-lote')" class="bg-amber-400 hover:bg-amber-500 text-white text-[11px] font-bold px-3 py-1.5 rounded transition"><i class="fa-solid fa-cart-plus mr-1"></i> Añadir</button>
+                    </div>
+                    <p class="text-sm text-gray-200 font-light leading-relaxed">Selección exclusiva de la parcela Lourdes, donde el microclima específico de la ladera sur potencia los azúcares naturales. Es nuestro café más dulce naturalmente, sin necesidad de procesos honey. La corriente de agua pura que atraviesa la finca alimenta estas plantas todo el año. En taza es miel, azúcar moreno, vainilla y frutas amarillas maduras como melocotón. Acidez baja y amable, cuerpo cremoso. Perfecto para quienes inician en especialidad.</p>
+                    <div class="grid grid-cols-2 gap-3 text-[11px] text-amber-100/90 pt-3 border-t border-white/10">
+                        <div><strong class="text-amber-300">Proceso:</strong> Lavado suave, fermentación corta</div>
+                        <div><strong class="text-amber-300">Microclima:</strong> Ladera sur, agua de manantial</div>
+                        <div><strong class="text-amber-300">Notas:</strong> Miel, vainilla, melocotón, panela</div>
+                        <div><strong class="text-amber-300">Dulzura:</strong> Muy alta, natural</div>
+                    </div>
+                </div>
+
+                <div id="desc-typica-sanroque" class="coffee-panel hidden bg-white/5 border border-amber-400/20 rounded-xl p-6 space-y-4">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-serif-jolly text-amber-400 font-bold">Variedad Typica San Roque</h4>
+                        <button onclick="addToCart('Café Typica San Roque', '250g - Estructurado')" class="bg-amber-400 hover:bg-amber-500 text-white text-[11px] font-bold px-3 py-1.5 rounded transition"><i class="fa-solid fa-cart-plus mr-1"></i> Añadir</button>
+                    </div>
+                    <p class="text-sm text-gray-200 font-light leading-relaxed">Gran consistencia de grano y resistencia noble en taza. El San Roque ofrece un perfil más herbal y especiado, ideal para amantes de cafés con carácter. Notas frescas a té verde, hierbas aromáticas, frutos secos como avellana y un fondo a cacao amargo. Su cuerpo es denso, bien estructurado y con final seco y limpio. Muy apreciado en catas profesionales por su complejidad sin acidez agresiva. Cultivado en la parte más alta de la finca.</p>
+                    <div class="grid grid-cols-2 gap-3 text-[11px] text-amber-100/90 pt-3 border-t border-white/10">
+                        <div><strong class="text-amber-300">Proceso:</strong> Lavado con reposo 24h</div>
+                        <div><strong class="text-amber-300">Altitud máxima:</strong> Parte alta finca</div>
+                        <div><strong class="text-amber-300">Notas:</strong> Té verde, avellana, cacao, herbal</div>
+                        <div><strong class="text-amber-300">Cuerpo:</strong> Pleno, estructurado, seco</div>
+                    </div>
+                </div>
+
+                <div id="desc-typica-mejorado" class="coffee-panel hidden bg-white/5 border border-amber-400/20 rounded-xl p-6 space-y-4">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-serif-jolly text-amber-400 font-bold">Variedad Typica Mejorado</h4>
+                        <button onclick="addToCart('Café Typica Mejorado', '250g - Mejorado')" class="bg-amber-400 hover:bg-amber-500 text-white text-[11px] font-bold px-3 py-1.5 rounded transition"><i class="fa-solid fa-cart-plus mr-1"></i> Añadir</button>
+                    </div>
+                    <p class="text-sm text-gray-200 font-light leading-relaxed">Combina la resistencia y estructura del linaje Typica original con una viveza cítrica refinada similar al Bourbon clásico. Es nuestro café con mayor concentración de antioxidantes gracias al proceso artesanal que preserva la "miel" parcialmente. En taza es brillante: lima kaffir, pomelo rosado, chocolate blanco y un toque floral. Estimulación noble que mejora concentración sin causar ansiedad. Perfecto para bebedores diarios que buscan salud y sabor.</p>
+                    <div class="grid grid-cols-2 gap-3 text-[11px] text-amber-100/90 pt-3 border-t border-white/10">
+                        <div><strong class="text-amber-300">Proceso:</strong> Honey ligero artesanal</div>
+                        <div><strong class="text-amber-300">Beneficio:</strong> Alto en antioxidantes</div>
+                        <div><strong class="text-amber-300">Notas:</strong> Cítricos, chocolate blanco, floral</div>
+                        <div><strong class="text-amber-300">Efecto:</strong> Energía limpia, sin acidez</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section id="calidad" class="bg-white py-16">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="font-serif-jolly text-3xl font-bold text-white uppercase">¿POR QUÉ ELEGIR NUESTROS PRODUCTOS?</h2>
+                <div class="w-16 h-0.5 bg-emerald-700 mx-auto mt-2"></div>
+                <p class="text-[14px] text-gray-600 max-w-2xl mx-auto mt-4 leading-relaxed">Porque estamos hartos del café que quema el estómago y las conservas llenas de agua y químicos. <strong class="text-white">Nosotros no vendemos latas, vendemos Costa Rica en cada bocado.</strong> Directo de la finca de Antonio Barrantes en Bajo Zapote, sin intermediarios, sin atajos. Lo que pruebas hoy, lo cosechamos ayer.</p>
+                <p class="mt-3 inline-block bg-[#112f1a] text-amber-300 px-4 py-1.5 rounded-full text-[12px] font-semibold tracking-wide">Jolly Foods — Del campo a tu mesa, sin excusas.</p>
+            </div>
+            <div class="space-y-6 text-sm text-gray-700 leading-relaxed font-light">
+                <p>
+                    En <strong>Jolly Foods</strong> y <strong>Finca El Puchol</strong>, entendemos que la excelencia gastronómica real nace desde el origen. Elegir nuestro catálogo es optar por un control de calidad implacable donde cada lote es supervisado de forma directa por la familia, garantizando la trazabilidad absoluta desde el suelo volcánico hasta la mesa del consumidor.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-6">
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer" onclick="showProduct('Palmito Premium', 'Corazones tiernos en conserva, cultivados en suelos volcánicos de Costa Rica. Textura crujiente, sabor delicado a nuez fresca. Procesado en menos de 4 horas tras cosecha. Ideal para ensaladas gourmet y tablas.', 'palmito_con_logo_a6b439b0.jpg')">
+                        <img src="palmito_con_logo_a6b439b0.jpg" alt="Palmito" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h4 class="font-serif-jolly text-lg font-bold">Palmito de Exportación</h4>
+                            <p class="text-xs opacity-90">Clic para ver detalles <button onclick="event.stopPropagation(); addToCart('palmito')" class="ml-2 bg-[#00a896] text-white px-2 py-1 rounded text-[10px]">+ Carrito</button></p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer" onclick="showProduct('Café de Especialidad', '8 variedades únicas cultivadas a 1.500 msnm por Antonio Barrantes. Proceso artesanal: lavado 24h, secado solar. Sin acidez dañina, alto en antioxidantes. Notas desde jazmín y bergamota hasta chocolate y frutos rojos.', 'cafe_con_logo_6042ad02.jpg')">
+                        <img src="cafe_con_logo_6042ad02.jpg" alt="Café" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h4 class="font-serif-jolly text-lg font-bold">Café Finca El Puchol</h4>
+                            <p class="text-xs opacity-90">Clic para ver detalles <button onclick="event.stopPropagation(); addToCart('palmito')" class="ml-2 bg-[#00a896] text-white px-2 py-1 rounded text-[10px]">+ Carrito</button></p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer" onclick="showProduct('Piña en Rodajas', 'Piña Golden MD2 cosechada en punto óptimo. Sin almíbar añadido, solo jugo natural. Dulzura tropical concentrada, 565g. Perfecta para postres, pizzas hawaianas y cócteles.', 'pina_con_logo_bd50517e.jpg')">
+                        <img src="pina_con_logo_bd50517e.jpg" alt="Piña" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h4 class="font-serif-jolly text-lg font-bold">Piña Dorada</h4>
+                            <p class="text-xs opacity-90">Clic para ver detalles <button onclick="event.stopPropagation(); addToCart('palmito')" class="ml-2 bg-[#00a896] text-white px-2 py-1 rounded text-[10px]">+ Carrito</button></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pedidos" class="max-w-xl mx-auto px-4 py-14">
+        <div class="bg-[#112f1a] text-white p-6 rounded-2xl shadow-lg space-y-4">
+            <div>
+                <h3 class="font-serif-jolly text-xl font-bold text-amber-400">Solicita una Cotización Especial</h3>
+                <p class="text-[11px] text-gray-300">Indícanos los subproductos de Palmito, Piña o las Variedades de Café de tu interés.</p>
+            </div>
+            <form class="space-y-3 text-xs text-gray-800">
+                <input type="text" placeholder="Nombre completo" class="w-full p-2.5 rounded bg-white outline-none border-0 shadow-sm" required>
+                <input type="email" placeholder="Correo electrónico" class="w-full p-2.5 rounded bg-white outline-none border-0 shadow-sm" required>
+                <select class="w-full p-2.5 rounded bg-white outline-none border-0 text-gray-600 shadow-sm">
+                    <option disabled selected>Seleccionar línea primaria...</option>
+                    <option value="palmito">Línea de Palmito Gourmet</option>
+                    <option value="pina">Línea de Piña Dorada</option>
+                    <option value="cafe">Variedades de Café de Especialidad</option>
+                    <option value="todos">Catálogo Completo (Corporativo)</option>
+                </select>
+                <textarea rows="4" placeholder="Escribe aquí los detalles de tu solicitud o volumen estimado de pedido..." class="w-full p-2.5 rounded bg-white outline-none border-0 text-gray-800 shadow-sm"></textarea>
+                <button type="submit" class="w-full bg-amber-400 hover:bg-amber-500 text-white font-bold py-3 rounded text-center transition cursor-pointer uppercase tracking-widerr">
+                    Enviar Mensaje de Cotización
+                </button>
+            </form>
+        </div>
+    </section>
+
+    
+    
+    <!-- MODAL DESCRIPCION PRODUCTO -->
+    <div id="product-modal" class="fixed inset-0 z-[200] hidden">
+        <div class="absolute inset-0 bg-black/70" onclick="closeProduct()"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <div class="relative">
+                <img id="modal-img" src="" alt="" class="w-full h-64 object-cover">
+                <button onclick="closeProduct()" class="absolute top-3 right-3 bg-black/50 text-white w-8 h-8 rounded-full hover:bg-black/70"><i class="fa-solid fa-xmark"></i></button>
+                <div class="absolute -bottom-6 left-6">
+                    <img src="jolly-logo-circulo-negro.png" class="w-16 h-16 rounded-full border-4 border-amber-400 bg-white shadow-lg">
+                </div>
+            </div>
+            <div class="pt-10 p-6">
+                <h3 id="modal-title" class="font-serif-jolly text-2xl font-bold text-white mb-2"></h3>
+                <p id="modal-desc" class="text-sm text-gray-600 leading-relaxed mb-4"></p>
+                <button onclick="addToCart(document.getElementById('modal-title').textContent, 'Desde modal'); closeProduct();" class="w-full bg-[#2b643b] hover:bg-[#1e4629] text-white font-semibold py-2.5 rounded-lg text-sm transition">
+                    <i class="fa-solid fa-cart-plus mr-2"></i>Añadir al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL MI CARRITO -->
+    <div id="cart-panel" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/50" onclick="toggleCart()"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col">
+            <div class="bg-[#112f1a] text-white p-5 flex justify-between items-center">
+                <h3 class="font-serif-jolly text-xl font-bold flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-amber-400"></i> Mi Carrito</h3>
+                <button onclick="toggleCart()" class="text-white/70 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#f4f7f4]">
+                <p class="text-center text-gray-500 text-sm py-10">Tu carrito está vacío.<br>Añade productos del catálogo.</p>
+            </div>
+            <div class="border-t border-gray-200 p-4 bg-white">
+                <div class="flex justify-between items-center mb-3 text-sm">
+                    <span class="font-semibold text-gray-600">Total estimado:</span>
+                    <span id="cart-total" class="font-bold text-lg text-white">$0.00</span>
+                </div>
+                <button onclick="enviarPedidoWhatsApp()" class="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition text-sm">
+                    <i class="fa-brands fa-whatsapp"></i> Finalizar por WhatsApp
+                </button>
+                <button onclick="vaciarCarrito()" class="w-full mt-2 text-xs text-gray-500 hover:text-red-600 transition">Vaciar carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-[#0b1f11] text-gray-400 text-xs py-8 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center md:text-left">
+                <span class="font-serif-jolly text-lg font-bold text-white block">Jolly Foods & Finca El Puchol</span>
+                <p class="text-[10px] text-gray-500 mt-1">&copy; 2026 Todos los derechos reservados. Valle Occidental, Costa Rica.</p>
+            </div>
+            <div class="flex gap-4 text-base">
+                <a href="https://wa.me/50689435264" target="_blank" class="hover:text-amber-400 transition"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/p/DWlW_eXishd/" target="_blank" class="hover:text-amber-400 transition"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function mostrarVariedad(idVariedad) {
+            // 1. Ocultar todos los paneles informativos de café
+            const paneles = document.querySelectorAll('.coffee-panel');
+            paneles.forEach(panel => {
+                panel.classList.replace('block', 'hidden');
+            });
+
+            // 2. Mostrar exclusivamente el panel seleccionado
+            const panelSeleccionado = document.getElementById('desc-' + idVariedad);
+            if (panelSeleccionado) {
+                panelSeleccionado.classList.replace('hidden', 'block');
+            }
+
+            // 3. Remover el estilo activo de todos los botones de la lista
+            const botones = document.querySelectorAll('.coffee-tab-btn');
+            botones.forEach(btn => {
+                btn.classList.remove('active-coffee-btn');
+            });
+
+            // 4. Añadir el estilo activo al botón actual
+            const botonActivo = document.getElementById('btn-' + idVariedad);
+            if (botonActivo) {
+                botonActivo.classList.add('active-coffee-btn');
+            }
+        }
+
+        
+        function showProduct(title, desc, img) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-desc').textContent = desc;
+            document.getElementById('modal-img').src = img;
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+        function closeProduct() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        // CARRITO DE COMPRAS
+        let cart = JSON.parse(localStorage.getItem('jollyCart')) || [];
+        
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            
+            cartCount.textContent = cart.length;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-center text-gray-500 text-sm py-10">Tu carrito está vacío.<br>Añade productos del catálogo.</p>';
+                cartTotal.textContent = '$0.00';
+                return;
+            }
+            
+            cartItems.innerHTML = cart.map((item, index) => `
+                <div class="bg-white p-3 rounded-lg border border-gray-100 flex justify-between items-start">
+                    <div class="flex-1">
+                        <h5 class="font-semibold text-xs text-white">${item.name}</h5>
+                        <p class="text-[11px] text-gray-500">${item.desc}</p>
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-600 text-xs ml-2"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+            
+            cartTotal.textContent = `$${(cart.length * 24.90).toFixed(2)}*`;
+        }
+        
+        function addToCart(name, desc) {
+            cart.push({name, desc, id: Date.now()});
+            localStorage.setItem('jollyCart', JSON.stringify(cart));
+            updateCartUI();
+            
+            // Animación feedback
+            const btn = document.getElementById('cart-count');
+            btn.classList.add('animate-ping');
+            setTimeout(() => btn.classList.remove('animate-ping'), 300);
+            
+            // Mostrar carrito brevemente
+            if (cart.length === 1) toggleCart();
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('jollyCart', JSON.stringify(cart));
+            updateCartUI();
+        }
+        
+        function vaciarCarrito() {
+            cart = [];
+            localStorage.removeItem('jollyCart');
+            updateCartUI();
+        }
+        
+        function toggleCart() {
+            document.getElementById('cart-panel').classList.toggle('hidden');
+        }
+        
+        function enviarPedidoWhatsApp() {
+            if (cart.length === 0) return alert('Tu carrito está vacío');
+            const productos = cart.map(i => `• ${i.name} - ${i.desc}`).join('%0A');
+            const mensaje = `Hola Jolly Foods, quiero cotizar:%0A%0A${productos}%0A%0ATotal productos: ${cart.length}`;
+            window.open(`https://wa.me/50689435264?text=${mensaje}`, '_blank');
+        }
+        
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', updateCartUI);
+ DE COMPRAS
+        let cart = JSON.parse(localStorage.getItem('jollyCart')) || [];
+        
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            
+            cartCount.textContent = cart.length;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-center text-gray-500 text-sm py-10">Tu carrito está vacío.<br>Añade productos del catálogo.</p>';
+                cartTotal.textContent = '$0.00';
+                return;
+            }
+            
+            cartItems.innerHTML = cart.map((item, index) => `
+                <div class="bg-white p-3 rounded-lg border border-gray-100 flex justify-between items-start">
+                    <div class="flex-1">
+                        <h5 class="font-semibold text-xs text-white">${item.name}</h5>
+                        <p class="text-[11px] text-gray-500">${item.desc}</p>
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-600 text-xs ml-2"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+            
+            cartTotal.textContent = `$${(cart.length * 24.90).toFixed(2)}*`;
+        }
+        
+        function addToCart(name, desc) {
+            cart.push({name, desc, id: Date.now()});
+            localStorage.setItem('jollyCart', JSON.stringify(cart));
+            updateCartUI();
+            
+            // Animación feedback
+            const btn = document.getElementById('cart-count');
+            btn.classList.add('animate-ping');
+            setTimeout(() => btn.classList.remove('animate-ping'), 300);
+            
+            // Mostrar carrito brevemente
+            if (cart.length === 1) toggleCart();
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('jollyCart', JSON.stringify(cart));
+            updateCartUI();
+        }
+        
+        function vaciarCarrito() {
+            cart = [];
+            localStorage.removeItem('jollyCart');
+            updateCartUI();
+        }
+        
+        function toggleCart() {
+            document.getElementById('cart-panel').classList.toggle('hidden');
+        }
+        
+        function enviarPedidoWhatsApp() {
+            if (cart.length === 0) return alert('Tu carrito está vacío');
+            const productos = cart.map(i => `• ${i.name} - ${i.desc}`).join('%0A');
+            const mensaje = `Hola Jolly Foods, quiero cotizar:%0A%0A${productos}%0A%0ATotal productos: ${cart.length}`;
+            window.open(`https://wa.me/50689435264?text=${mensaje}`, '_blank');
+        }
+        
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', updateCartUI);
+
+            const botonActivo = document.getElementById('btn-' + idVariedad);
+            if (botonActivo) {
+                botonActivo.classList.add('active-coffee-btn');
+            }
+        }
+    </script>
+
+</body>
+</html>

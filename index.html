@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jolly Foods - Del Origen a tu Éxito</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+        body{font-family:'Arial',sans-serif;background:#0A2E1A;color:#fff}
+        header{background:#000;padding:15px 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000;border-bottom:3px solid #D4AF37}
+        .logo{display:flex;align-items:center;gap:10px}
+        .logo span{font-weight:bold;font-size:22px;color:#D4AF37}
+        nav{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+        nav a{color:#fff;text-decoration:none;font-weight:bold;font-size:14px;cursor:pointer;transition:0.3s}
+        nav a:hover{color:#D4AF37}
+        #cartBtn{background:#D4AF37;color:#000;border:none;padding:10px 20px;font-weight:bold;cursor:pointer;border-radius:5px}
+        #cartBtn:hover{background:#fff}
+        .hero{position:relative;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+        .hero video{position:absolute;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(0.6) saturate(1.2)}
+        .hero-overlay{position:absolute;width:100%;height:100%;background:radial-gradient(circle,rgba(10,46,26,0.2) 0%,rgba(10,46,26,0.85) 100%);z-index:2}
+        .hero-content{position:relative;z-index:3;text-align:center;padding:0 20px;max-width:1000px}
+        .hero h1{font-size:5rem;margin-bottom:25px;color:#D4AF37;text-shadow:4px 4px 20px #000;line-height:1.1;letter-spacing:2px}
+        .hero .subtitle{font-size:2.2rem;margin-bottom:20px;color:#fff;text-shadow:3px 3px 10px #000;font-weight:300}
+        .hero .tagline{font-size:1.4rem;margin-bottom:50px;color:#D4AF37;text-shadow:2px 2px 8px #000}
+        .btn{background:#D4AF37;color:#000;padding:20px 50px;border:none;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;font-size:17px;transition:0.3s;border-radius:5px;box-shadow:0 4px 20px rgba(212,175,55,0.5);text-transform:uppercase}
+        .btn:hover{background:#fff;transform:translateY(-3px);box-shadow:0 8px 30px rgba(212,175,55,0.7)}
+        .btn-small{padding:12px 25px;font-size:14px;margin-top:15px}
+        section{padding:100px 5%;max-width:1400px;margin:auto;background:#0A2E1A}
+        h2{font-size:3.2rem;margin-bottom:50px;color:#D4AF37;text-align:center;text-shadow:2px 2px 10px #000}
+        h3{color:#D4AF37;font-size:2rem;margin-bottom:20px}
+        h4{color:#D4AF37;font-size:1.4rem;margin:20px 0 10px}
+        .gold-text{color:#D4AF37}
+        .nosotros-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+        .nosotros-grid img{width:100%;border:4px solid #D4AF37;box-shadow:0 10px 40px rgba(0,0,0,0.5)}
+        .catalogo-item{background:linear-gradient(135deg,#000 0%,#1a1a1a 100%);margin:30px 0;padding:35px;cursor:pointer;border:3px solid #D4AF37;transition:0.3s;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.4)}
+        .catalogo-item:hover{background:#1a1a1a;border-color:#fff;transform:translateX(10px)}
+        .catalogo-content{display:none;padding:35px 0}
+        .catalogo-content.active{display:block}
+        .catalogo-content img{width:100%;max-width:650px;margin:25px 0;border:4px solid #D4AF37;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,0.6)}
+        .variedades{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:30px;margin-top:50px}
+        .variedad{background:linear-gradient(135deg,#000 0%,#0d0d0d 100%);padding:30px;border:2px solid #D4AF37;cursor:pointer;transition:0.4s;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.5)}
+        .variedad:hover{border-color:#fff;transform:translateY(-8px);box-shadow:0 15px 50px rgba(212,175,55,0.4)}
+        .variedad h4{font-size:1.5rem;margin-bottom:12px}
+        .variedad .origen{font-size:14px;color:#aaa;margin-bottom:15px;font-style:italic}
+        .variedad .badge{display:inline-block;background:#D4AF37;color:#000;padding:6px 14px
